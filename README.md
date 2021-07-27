@@ -1,120 +1,181 @@
-<!--
-theme: gaia
-class:
- - invert
-headingDivider: 2 
+---
+marp: true
+theme: uncover
+class: invert
 paginate: true
--->
+_paginate: false
+---
 
-<!--
-_class:
- - lead
- - invert
--->
+# How to automate your resume in _R Markdown_
 
-# Marp Action for GitHub
+Nick McMillan
 
-Presentations to Webpages: Instantly!
+---
 
-## What?
+# Why automate?
 
-[Marp](https://marp.app/) lets you create slides from markdown (like this!).
+1. Updating a resume can be **time consuming**!!
+1. Different jobs may require specifically tailored resumes
+1. We are data journalists and using our skills to make our lives easier is fun!
 
-[Marp Action](https://github.com/ralexander-phi/marp-action) lets you automatically deploy your presentation to [GitHub Pages](https://pages.github.com/).
+---
 
-This presentation is both a [website](https://alexsci.com/test-marp-action) and a [README.md](https://github.com/ralexander-phi/test-marp-action/blob/dev/README.md).
+# What we will cover
 
-## Why?
+1. Markdown
+1. Format a CSV to be the resume "backend"
+1. Tools in R
+   - Rmarkdown
+   - Pagedown
+   - Purr
 
-Treat your presentation the same way you treat code.
+---
 
-Use git to track changes. Pull requests to collaborate. Deploy to a webpage automatically.
+# What is [Markdown](https://www.markdownguide.org/getting-started/)?
 
-See a bug? Open an issue or pull request!
+---
 
-## Setup
+### "Markdown is a lightweight markup language that you can use to add formatting elements to plaintext text documents."
 
-Want to create your own?
+-- Markdown's website
 
-First, create a new repo [from the template repo](https://github.com/ralexander-phi/test-marp-action).
+![bg right:40% 80% invert](photos/markdown_logo.png)
 
-![](img/use-template.png)
+---
 
-## Configure GitHub Pages
+# Markdown vs WYSIWYG
 
-[Setup publishing](https://help.github.com/en/github/working-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#choosing-a-publishing-source).
+| Markdown                                         | MS Word                              |
+| ------------------------------------------------ | ------------------------------------ |
+| - Add special symbols to represent style changes | - click buttons to format words      |
+| Future proof: any computer can read it           | Formating is specific to the program |
 
-Remember the branch and URL shown.
+---
 
-## Update Workflow
+# Markdown Examples
 
-You'll update the workflow file over the next few slides. You can do this right in the GitHub web page (click on the pencil icon).
+```
+# This is a heading
 
-`.github/workflows/main.yml`
+## This is a subheading
 
-## `BASE_URL`
+### This is a sub sub heading
 
-Set this to the domain you're using for GitHub Page (from earlier).
+*This text is italic*
 
-If you add a custom domain later, you'll need to update this.
+*This text is bold**
 
-## `PUBLISH_TO_BRANCH`
+This is regular text
 
-Tell the build which branch you are using for GitHub Pages (you picked this earlier).
+```
 
-This is likely either `main` or `gh-pages`. Set `PUBLISH_TO_BRANCH` to the correct branch.
+Test it out in this [online markdown editor](https://dillinger.io/)
 
-## Update Workflow
+---
 
-Commit `.github/workflows/main.yml` back to `dev` branch.
+# Fun Fact
 
-This will kick off a build.
+This presentation was created in Markdown and a program converted it into a slide!
 
-## Check if the build succeeded
+---
 
-Click on Actions tab and see if the build succeeded.
+# A sample markdown entry
 
-![](img/click-actions.png)
+```
+### PhD. Candidate, Biostatistics
 
-## Load your new web page
+Vanderbilt University
 
-Any update to your site will take a few minutes to be visible. Be patient.
+Nashville, TN
 
-## Create your slides
+2011-2015
 
-Finally, start adding your own content.
+- Working on Bayesian network models & interactive visualization platforms
+- University Graduate Fellow
 
-You can [install and run marp-cli](https://github.com/marp-team/marp-cli/blob/master/README.md) locally to test out the content before publishing.
+```
 
-## Learn more about Marp
+![](photos/sample_entry.png)
 
-This is a good time to learn more about Marp. Here's some resources:
+---
 
-- [CommonMark](https://commonmark.org/)
-- [Cheat Sheet](https://commonmark.org/help/)
-- [Themes](https://github.com/marp-team/marp-core/tree/master/themes)
-- [CSS Themes](https://marpit.marp.app/theme-css)
-- [Directives](https://marpit.marp.app/directives)
-- [VS Code plugin](https://marketplace.visualstudio.com/items?itemName=marp-team.marp-vscode)
+# How to get from Markdown to HTML Resume?
 
-## Example Sites
+---
 
-Known sites using this action are:
+# [Pagedown](https://pagedown.rbind.io/)
 
-- [University of Illinois at Urbana-Champaign's CS 199 Even More Practice](https://cs199emp.netlify.app/) [(code)](https://github.com/harsh183/emp-125)
+- _Complex:_ "an R package based on a JavaScript LIbary to paginate the HTML output of R Markdown documents"
 
-Send a [pull request](https://github.com/ralexander-phi/test-marp-action) to get your site added.
+## ![bg right:40% 80%](photos/pagedown_logo.png)
 
-## Publish your slides
+---
 
-When you are ready to share your presentation, commit or merge to `dev` and your content on GitHub Pages will automatically update.
+# [Pagedown](https://pagedown.rbind.io/)
 
-# 🎉
-<!--
-_class:
- - lead
- - invert
--->
-### Hooray!
+- _Simple_: Makes R markdown look pretty on the web/document form
 
+## ![bg right:40% 80%](photos/pagedown_logo.png)
 
+---
+
+# How to format the [CSV]()
+
+- Headers
+  - section
+    - education, experience ..
+  - title
+  - location
+  - institution
+  - start_date
+  - end_date
+  - description 1-3
+  - boolean
+
+---
+
+# [R Markdown Code]()
+
+1. Set chunks to `asis`
+   - This treats output text as pure markdown.
+     ```
+     knitr::opts_chunk$set(results = 'asis')
+     ```
+
+---
+
+# [R Markdown Code]()
+
+## Concept: `string literals`
+
+2. Use the `glue()` library to output string in a template format to create the format that the `Pagedown` resume template requires
+
+---
+
+# [R Markdown Code]()
+
+2. Load your resume csv
+
+---
+
+# [R Markdown Code]()
+
+## Resume: Building out the descriptions
+
+3a. Use `pivot_longer()` from `tidyverse` to transform the three descriptions into character list for each section
+
+---
+
+# [R Markdown Code]()
+
+## Resume: Building out the descriptions
+
+3b. From the `purrr` library (part of`tidyverse`), use `map()` to iterate through each character list and append a bullet
+
+---
+
+# Finally
+
+- Combine into one function
+- Select each section and put into R Markdown template
+- Push Knit!
