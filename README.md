@@ -27,7 +27,7 @@ Nick McMillan
 1. Tools in R
    - Rmarkdown
    - Pagedown
-   - Purr
+   - Purrr
 
 ---
 
@@ -184,7 +184,7 @@ Nashville, TN
 
 # Resources + Tutorials
 
-- [Nick Stayer's Blog Post](https://livefreeordichotomize.com/2019/09/04/building_a_data_driven_cv_with_r/)
-- [Bryan Jenk's BLog Post](https://github.com/tallguyjenks/CV)
+- This lesson is based on [Nick Stayer's Blog Post](https://livefreeordichotomize.com/2019/09/04/building_a_data_driven_cv_with_r/)
+- [Bryan Jenk's Blog Post](https://github.com/tallguyjenks/CV)
 - [Marp](https://marp.app/): to create a static Markdown driven slide presentations
 - [Revealjs](https://revealjs.com/): to create animated Markdown driven slide presentations
