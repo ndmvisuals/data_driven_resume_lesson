@@ -8,7 +8,9 @@ _paginate: false
 
 # How to automate your resume in _R Markdown_
 
-Nick McMillan
+## Nick McMillan
+
+[Link](https://ndmvisuals.github.io/data_driven_resume_lesson/#1) to slide version
 
 ---
 
