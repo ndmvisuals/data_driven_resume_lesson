@@ -174,7 +174,7 @@ Nashville, TN
 
 ---
 
-# Finally put it all together(https://github.com/ndmvisuals/data_driven_resume_lesson/blob/dev/code_resources/automated_resume_example.Rmd)
+# [Finally put it all together](https://github.com/ndmvisuals/data_driven_resume_lesson/blob/dev/code_resources/automated_resume_example.Rmd)
 
 - Combine into one function
 - Select each section and put into R Markdown template
