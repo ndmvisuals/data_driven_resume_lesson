@@ -63,7 +63,7 @@ Nick McMillan
 
 *This text is italic*
 
-*This text is bold**
+**This text is bold**
 
 This is regular text
 
