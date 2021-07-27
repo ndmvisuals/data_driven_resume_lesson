@@ -1,6 +1,6 @@
 ---
-title: Nick Strayer's Resume"
-author: Nick Strayer
+title: Nick McMillan Resume"
+author: Nick McMillan
 output:
   pagedown::html_resume:
     css: ['resume']
@@ -30,16 +30,14 @@ nicks_resume_data <- read_excel("~/Code/nick_resume/nicks_resume_data.xlsx")
 Aside
 ================================================================================
 
-![logo](photos/nick_photo.jpg){width=100%}
+![logo](../photos/nick_photo.jpg){width=100%}
 
 
 Contact {#contact}
 --------------------------------------------------------------------------------
 
-```{r}
-#contact_info %>% 
-  #glue_data("- <i class='fa fa-{icon}'></i> {contact}")
-```
+Phone: 360.606.0403
+Email: nickmcm@umd.edu
 
 More info {#more-info}
 --------------------------------------------------------------------------------
@@ -57,9 +55,7 @@ Main
 Nick McMillan {#title}
 --------------------------------------------------------------------------------
 
-```{r}
-"This could be some intro text"
-```
+Some intro text
 
 
 
