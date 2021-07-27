@@ -33,7 +33,7 @@ jobs:
         PUBLISH_TO_BRANCH: master
         
         # You'll want to set this to your domain
-        BASE_URL: https://alexsci.com/test-marp-action/
+        BASE_URL: https://ndmvisuals.github.io/data_driven_resume_lesson/
 
       # consider using a tagged release here
       # https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsuses
