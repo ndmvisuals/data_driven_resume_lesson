@@ -1,0 +1,84 @@
+---
+title: Nick Strayer's Resume"
+author: Nick Strayer
+output:
+  pagedown::html_resume:
+    css: ['resume']
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  results='asis', 
+  echo = FALSE
+)
+
+
+library(glue)
+library(tidyverse)
+library(readxl)
+library(pagedown)
+
+source("parse_resume_csv.R")
+
+nicks_resume_data <- read_excel("~/Code/nick_resume/nicks_resume_data.xlsx")
+
+#install.packages(c("blob", "broom", "digest", "fastmatch", "googlesheets4", "htmltools", "jpeg", "rlang", "Rttf2pt1", "rvest", "sf", "stringi", "tibble", "utf8"))
+
+```
+
+
+Aside
+================================================================================
+
+![logo](photos/nick_photo.jpg){width=100%}
+
+
+Contact {#contact}
+--------------------------------------------------------------------------------
+
+```{r}
+#contact_info %>% 
+  #glue_data("- <i class='fa fa-{icon}'></i> {contact}")
+```
+
+More info {#more-info}
+--------------------------------------------------------------------------------
+
+See portofolio at [www.nickmcmillan.com](www.nickmcmillan.com) for more complete list of positions and publications.
+
+
+
+
+
+
+Main
+================================================================================
+
+Nick McMillan {#title}
+--------------------------------------------------------------------------------
+
+```{r}
+"This could be some intro text"
+```
+
+
+
+Education {data-icon=graduation-cap data-concise=true}
+--------------------------------------------------------------------------------
+
+```{r}
+nicks_resume_data  %>% parse_resume_csv('education')
+```
+
+
+
+Selected Positions {data-icon=suitcase}
+--------------------------------------------------------------------------------
+
+```{r}
+nicks_resume_data  %>% parse_resume_csv('experience')
+```
+
+
+
+

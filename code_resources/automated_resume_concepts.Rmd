@@ -1,0 +1,205 @@
+---
+title: "sample_resume_lesson"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(results = 'asis')
+```
+
+# Example of asis
+Comment out results = asis and then knit the document.  Knit it again after un-commenting the results = asis
+
+```{r}
+
+cat("# This is a header")
+
+```
+
+
+# Load in necessary libraries
+```{r}
+library(glue)
+library(tidyverse)
+library(readxl)
+library(pagedown)
+```
+
+# Glue Example
+
+```{r}
+
+title <- "Rice Thresher Newspaper"
+loc <- "Houston, TX"
+institution <- "Rice University"
+timeline <- "2018-2019"
+description_bullets <- "- Collaborated with the Thresher editor-in-chief to report on newsworthy stories
+- Led 5 other videographers and assigned responsibilities and deadlines
+"
+
+print(glue(
+  "### {title}",
+  "\n\n",   # Add two new lines
+  "{loc}",
+  "\n\n",
+  "{institution}",
+  "\n\n",
+  "{timeline}", 
+  "\n\n",
+  "{description_bullets}"
+))
+
+```
+
+
+
+
+
+# Load in csv of resume
+```{r}
+
+nicks_resume_data <- read_excel("~/Code/nick_resume/nicks_resume_data.xlsx")
+unique(nicks_resume_data$section)
+
+blah = "education"
+nicks_resume_data %>% filter(section == blah) %>% View()
+```
+
+# Build out the different parts
+```{r}
+
+
+# Add id to keep track of each entry
+
+position_data = nicks_resume_data %>% 
+  # Add a unique id to each section
+  mutate(id = 1:n())
+
+
+
+pivoted_positions = position_data %>% 
+  pivot_longer(starts_with("description"),
+               names_to = "description_num",
+               values_to = "description",
+               # Drop NA to exclude any section that does not have a description
+               values_drop_na = TRUE )
+
+pos_with_descrip_list = pivoted_positions %>% 
+  group_by(id) %>% 
+  # Wrap up descriptions into a list column
+  mutate(descriptions = list(description)) %>% 
+  ungroup() %>% 
+  # Only keep the first row for each section that has all the bullet points
+  filter(description_num == "description_1") %>%
+  # Don't need these columns
+  select(-description_num, - description) 
+
+
+# If the start date is missing, or start date == end date, just use end. Otherwise build a range
+positions_with_timeline = pos_with_descrip_list %>% 
+  mutate(timeline = ifelse(
+  is.na(start_date) | start_date == end_date, 
+  end_date, glue("{start_date} - {end_date}")))
+
+positions_collapsed_bullets = positions_with_timeline %>% 
+  mutate(description_bullets = map_chr(
+    descriptions, ~paste("-",.,collapse = '\n')))
+
+
+
+positions_no_na = positions_collapsed_bullets %>% mutate_all(~ifelse(is.na(.), "N/A", .))
+ 
+
+
+
+positions_no_na %>% glue_data(
+   "### {title}",
+   "\n\n",
+   "{location}",
+   "\n\n",
+   "{institution}",
+   "\n\n",
+   "{timeline}", 
+   "\n\n",
+   "{description_bullets}",
+   "\n\n\n"
+ )
+```
+
+# Combine our work into one function that can specify sections
+
+```{r}
+
+parse_resume_csv = function(resume_csv, section_description){
+  
+  position_data = resume_csv %>% 
+    filter(section == section_description) %>% 
+  # Add a unique id to each section
+  mutate(id = 1:n())
+
+  print(position_data)
+
+pivoted_positions = position_data %>% 
+  pivot_longer(starts_with("description"),
+               names_to = "description_num",
+               values_to = "description",
+               # Drop NA to exclude any section that does not have a description
+               values_drop_na = TRUE )
+
+pos_with_descrip_list = pivoted_positions %>% 
+  group_by(id) %>% 
+  # Wrap up descriptions into a list column
+  mutate(descriptions = list(description)) %>% 
+  ungroup() %>% 
+  # Only keep the first row for each section that has all the bullet points
+  filter(description_num == "description_1") %>%
+  # Don't need these columns
+  select(-description_num, - description) 
+
+
+# If the start date is missing, or start date == end date, just use end. Otherwise build a range
+positions_with_timeline = pos_with_descrip_list %>% 
+  mutate(timeline = ifelse(
+  is.na(start_date) | start_date == end_date, 
+  end_date, glue("{start_date} - {end_date}")))
+
+positions_collapsed_bullets = positions_with_timeline %>% 
+  mutate(description_bullets = map_chr(
+    descriptions, ~paste("-",.,collapse = '\n')))
+
+
+
+positions_no_na = positions_collapsed_bullets %>% mutate_all(~ifelse(is.na(.), "N/A", .))
+ 
+
+
+
+result = positions_no_na %>% glue_data(
+   "### {title}",
+   "\n\n",
+   "{location}",
+   "\n\n",
+   "{institution}",
+   "\n\n",
+   "{timeline}", 
+   "\n\n",
+   "{description_bullets}",
+   "\n\n\n"
+ )
+print(result)
+
+}
+
+```
+
+# Test function
+
+```{r}
+ parse_resume_csv(nicks_resume_data, "education")
+ parse_resume_csv(nicks_resume_data, "experience")
+
+```
+
+
+
+
