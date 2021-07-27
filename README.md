@@ -119,7 +119,7 @@ Nashville, TN
 
 ---
 
-# How to format the [CSV]()
+# How to format the [CSV](https://github.com/ndmvisuals/data_driven_resume_lesson/blob/dev/code_resources/nicks_resume_data.xlsx)
 
 - Headers
   - section
@@ -134,7 +134,7 @@ Nashville, TN
 
 ---
 
-# [R Markdown Code]()
+# [R Markdown Code](https://github.com/ndmvisuals/data_driven_resume_lesson/blob/dev/code_resources/automated_resume_concepts.Rmd)
 
 1. Set chunks to `asis`
    - This treats output text as pure markdown.
@@ -144,7 +144,7 @@ Nashville, TN
 
 ---
 
-# [R Markdown Code]()
+# [R Markdown Code](https://github.com/ndmvisuals/data_driven_resume_lesson/blob/dev/code_resources/automated_resume_concepts.Rmd)
 
 ## Concept: `string literals`
 
@@ -152,13 +152,13 @@ Nashville, TN
 
 ---
 
-# [R Markdown Code]()
+# [R Markdown Code](https://github.com/ndmvisuals/data_driven_resume_lesson/blob/dev/code_resources/automated_resume_concepts.Rmd)
 
 2. Load your resume csv
 
 ---
 
-# [R Markdown Code]()
+# [R Markdown Code](https://github.com/ndmvisuals/data_driven_resume_lesson/blob/dev/code_resources/automated_resume_concepts.Rmd)
 
 ## Resume: Building out the descriptions
 
@@ -166,7 +166,7 @@ Nashville, TN
 
 ---
 
-# [R Markdown Code]()
+# [R Markdown Code](https://github.com/ndmvisuals/data_driven_resume_lesson/blob/dev/code_resources/automated_resume_concepts.Rmd)
 
 ## Resume: Building out the descriptions
 
@@ -174,8 +174,17 @@ Nashville, TN
 
 ---
 
-# Finally
+# Finally put it all together(https://github.com/ndmvisuals/data_driven_resume_lesson/blob/dev/code_resources/automated_resume_example.Rmd)
 
 - Combine into one function
 - Select each section and put into R Markdown template
 - Push Knit!
+
+---
+
+# Resources + Tutorials
+
+- [Nick Stayer's Blog Post](https://livefreeordichotomize.com/2019/09/04/building_a_data_driven_cv_with_r/)
+- [Bryan Jenk's BLog Post](https://github.com/tallguyjenks/CV)
+- [Marp](https://marp.app/): to create a static Markdown driven slide presentations
+- [Revealjs](https://revealjs.com/): to create animated Markdown driven slide presentations
